@@ -1,0 +1,20 @@
+version: '3.2'
+volumes:
+  jenkins-data:
+    driver: "local"
+services:
+  jenkins:
+    build: .
+    image: cicd/jenkins-dnd:latest
+    container_name: jenkins-dnd
+    privileged: true
+    stdin_open: true
+    tty: true
+    restart: always
+    user: jenkins
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+
